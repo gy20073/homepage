@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title> Deep Learning for Tactile Understanding From Visual and Haptic Data </title>
+<link href="defaultstyles.css" rel="stylesheet" media="screen" />
+<script type="text/javascript" src="branding.js"></script>
+<script type="text/JavaScript" src="http://www.colorado.edu/templates/faculty-template/js/curvycorners.js"></script>
+
+<style>
+.publogo { width: 100 px; margin-right : 20px; float : left; border : 0;}
+.publication { clear : left; padding-bottom : 0px; }
+.publication p { height : 100px; padding-top : 5px;}
+.publication strong a { color : #0000A0; }
+.publication .links { position : relative; top : 15px }
+.publication .links a { margin-right : 20px; }
+
+div.margin-20{
+	margin-right: 20px;
+    margin-left: 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+<div id="container">
+	<!--<div id="ucb"><script type="text/javascript">ucbheader();</script></div> -->
+    <div id="wrapper">
+    <div id="banner" align="center">
+    	<h1 >Deep Learning for Tactile Understanding<br>
+    	 From Visual and Haptic Data</h1>
+    	<p>
+    	<a href="../index.html" style="color:white">Yang Gao</a>, 
+    	<a href="http://www.eecs.berkeley.edu/~lisa_anne/" style="color:white"> Lisa Anne Hendricks </a>, 
+    	<a href="http://www.seas.upenn.edu/~kuchenbe/" style="color:white"> Katherine J. Kuchenbecker </a>, 
+    	<a href="http://www.eecs.berkeley.edu/~trevor/" style="color:white"> Trevor Darrell </a>
+    	</p>
+    </div>
+
+    <div id="page">
+		<div id="content">
+       
+       <br>
+		<div class="margin-20">
+			<h2 align="left">Abstract</h2>
+			<p>
+			Robots that need to interact with the physical world will benefit from a fine-grained tactile understanding of objects and surfaces. Additionally, for certain tasks, robots may need to know the haptic properties of an object before touching it. To enable better tactile understanding for robots, we propose a method of classifying surfaces with haptic adjectives (e.g., compressible or smooth) from both visual and physical interaction data. Humans typically combine visual predictions and feedback from physical interactions to accurately predict haptic properties and interact with the world. Inspired by this cognitive pattern, we propose and explore a purely visual haptic prediction model. Purely visual models enable a robot to “feel” without physical interaction. Furthermore, we demonstrate that using both visual and physical interaction signals together yields more accurate haptic classification. Our models take advantage of recent advances in deep neural networks by employing a unified approach to learning features for physical interaction and visual observations. Our approach is beneficial not only because it results in better performance, but also because it eliminates the need for domain-specific knowledge in feature design.
+			</p>        	
+		</div> <!-- end to abstract container -->
+		<br>
+
+		<div class="margin-20">
+			<h2 align="left">Code and Data</h2>
+			<p>
+				We've released the code of our haptic, visual and multimodal pipelines. A script reproducing Penn's Haptic BOLT experiment [1, 2] is also attached. See the readme.txt that comes along with the code for instructions. 
+			</p>        	
+
+			<span class="links">
+	    		<a href="hapvis_code.tar.gz">Code,   </a>
+            </span>
+
+			<span class="links">
+	    		<a href="https://drive.google.com/folderview?id=0B0ldy05JZFSaaTlHSlVLLWV1OE0">Data [1.36GB]</a>
+            </span>
+
+			<h3> Dependencies </h3>
+			<p>
+				<a href="https://github.com/IanTheEngineer/Penn-haptics-bolt">Penn Haptics BOLT Project </a>,
+				<a href="http://caffe.berkeleyvision.org">Caffe</a>,
+				<a href="http://www.mathworks.com/products/matlab/"> MATLAB </a>,
+				<a href="https://ipython.org"> IPython </a> 
+			</p>
+		</div> <!-- end to abstract container -->
+		<br>
+
+		<div class="margin-20">
+			<h2 align="left">Reproduction of Penn's Experiments</h2>
+			<p>
+				Our reproduction of Penn's dynamic and MKL features doesn't exactly match the scores reported in [2]. We could have a pretty similar score of the static features and thus its discussion is omitted here. Multi kernel learning (MKL) is a method that linearly combine the Gram matrix of dynamic and static features to give a overall Gram matrix. Thus the score of MKL depends on both dynamic and static features. 
+			</p>
+			<p>
+				The second row (A) in Table 1 shows the F1 scores reported in [2]. The third row (B) comes from a reproduction from the pre-computed features, that is saved in the Penn Haptics BOLT github repository. By training from raw signals (provided in the section above), we get the scores shown in the last two rows, where the first one (C) trains HMM chains only using positive examples (training plus testing), while the second one (D) uses all instances (also training plus testing).	 
+			</p>   
+			<p>
+				We could see that the precomputed features (B) are the same as the reproduction C. The dynamic score reported in the paper is the same as our reproduction D, but the MKL score in A is the same as that in B and C. To avoid possible leaking test labels to the training procedure, we think that using all instances (training plus testing) to train HMM chains (D) in the dynamic feature is a more plausible way than only using positive instances (C). Thus we take D to compare in the paper. 
+			</p>
+
+			<!-- table F1 scores -->  
+			<p> Table 1: F1 scores of dynamic features and MKL features reproduced. </p>   	
+			<style type="text/css">
+			.tg  {border-collapse:collapse;border-spacing:0;}
+			.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+			.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+			</style>
+			<table class="tg">
+			  <tr>
+			    <th class="tg-031e"></th>
+			    <th class="tg-031e">dynamic</th>
+			    <th class="tg-031e">Multi Kernel Learning (MKL)</th>
+			  </tr>
+			  <tr>
+			    <td class="tg-031e">A. reported in [2]</td>
+			    <td class="tg-031e">0.52</td>
+			    <td class="tg-031e">0.77</td>
+			  </tr>
+			  <tr>
+			    <td class="tg-031e">B. reproduction using pre-saved features in github</td>
+			    <td class="tg-031e">0.826</td>
+			    <td class="tg-031e">0.768</td>
+			  </tr>
+			  <tr>
+			    <td class="tg-031e">C. reproduction using positive instances trained HMM</td>
+			    <td class="tg-031e">0.821</td>
+			    <td class="tg-031e">0.767</td>
+			  </tr>
+			  <tr>
+			    <td class="tg-031e">D. reproduction using  all instances trained HMM</td>
+			    <td class="tg-031e">0.521</td>
+			    <td class="tg-031e">0.492</td>
+			  </tr>
+			</table>
+		</div> <!-- end to abstract container -->
+		<br>
+
+		<!--
+		<div class="margin-20">
+			<h2 align="left">Citation</h2>
+			<p>
+				
+			</p>        	
+		</div> 
+		<br>
+		-->
+
+		<div class="margin-20">
+			<h2 align="left">References</h2>
+			<p>
+				[1] V. Chu, I. McMahon, L. Riano, C. G. McDonald, Q. He, J. M. Perez-Tejada, M. Arrigo, N. Fitter, J. Nappo, T. Darrell, and K. J. Kuchenbecker, “Using robotic exploratory procedures to learn the meaning of haptic adjectives,” in Proc. IEEE International Conference on Robotics and Automation, Karlsruhe, Germany, May 2013, pp. 3048–3055.
+			</p>        	
+
+			<p>
+				[2] V. Chu, I. McMahon, L. Riano, C. G. McDonald, Q. He, J. M. Perez- Tejada, M. Arrigo, T. Darrell, and K. J. Kuchenbecker, “Robotic learning of haptic adjectives through physical interaction,” Robotics and Autonomous Systems, vol. 63, no. 3, pp. 279–292, January 2015.
+			</p>
+		</div> <!-- end to abstract container -->
+		<br>
+
+
+	</div> <!-- end of content -->
+    </div> <!-- end of page -->
+	</div> <!-- end of wrapper -->
+    <div id="footer">
+    	<!--<script type="text/javascript">ucbfooter();</script> -->
+        Last Updated on 09/21/2015. &copy; 2013-2015 Yang Gao. All Rights Reserved. Desgined by <a href="http://assett.colorado.edu/learn/tutorials/create-your-website/">ASSETT</a>
+    </div> 
+</div> <!-- end of the outtest container -->
+</body>
+</html>
